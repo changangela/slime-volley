@@ -7,6 +7,8 @@ var GROUND_COLOR = "#99ff66"; // light green
 var GROUND_HEIGHT = 50;
 
 var SLIME_COLOR = "blue"; // blue
+var SLIME_RADIUS = 60;
+var SLIME_SPEED = 5;
 
 var FENCE_COLOR = "#dbce8e" // light brown
 var FENCE_X = 30;
@@ -28,7 +30,7 @@ function setup() {
     frameRate(FRAME_RATE);
     canvas = new Canvas(CANVAS_X, CANVAS_Y, BACKGROUND_COLOR);
 
-    slime = new Slime(CANVAS_X / 4, CANVAS_Y - GROUND_HEIGHT, SLIME_COLOR);
+    slime = new Slime(CANVAS_X / 4, CANVAS_Y - GROUND_HEIGHT, SLIME_COLOR, SLIME_RADIUS, SLIME_SPEED);
 
     fence = new Fence(CANVAS_X / 2, CANVAS_Y - FENCE_Y - GROUND_HEIGHT, FENCE_X, FENCE_Y, FENCE_COLOR);
 
@@ -45,8 +47,34 @@ function draw() {
 
 	// update ball location
 	ball.update();
-
+	slime.update();
 	
-	slime.show();
+	slime.show(ball);
 	ball.show();
 }
+
+function keyPressed() {
+
+    if (key === 'W') {
+        slime.face(0, -1);
+    } else if (key === 'S') {
+        slime.face(0, 1);
+    } else if (key === 'A') {
+        slime.face(-1, 0);
+    } else if (key === 'D') {
+        slime.face(1, 0);
+    }
+
+    if (keyCode === UP_ARROW) {
+        slime.face(0, -1);
+    } else if (keyCode === DOWN_ARROW) {
+        slime.face(0, 1);
+    } else if (keyCode === LEFT_ARROW) {
+        slime.face(-1, 0);
+    } else if (keyCode === RIGHT_ARROW) {
+        slime.face(1, 0);
+    }
+
+
+}
+
