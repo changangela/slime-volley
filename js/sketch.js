@@ -4,12 +4,12 @@ var FRAME_RATE = 10;
 var BACKGROUND_COLOR = "#ADD8E6"; // light blue
 
 var GROUND_COLOR = "#99ff66"; // light green
-var GROUND_HEIGHT = 30;
+var GROUND_HEIGHT = 50;
 
 var SLIME_COLOR = "blue"; // blue
 
 var FENCE_COLOR = "#dbce8e" // light brown
-var FENCE_X = 20;
+var FENCE_X = 30;
 var FENCE_Y = 100;
 
 var canvas;
