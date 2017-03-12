@@ -4,11 +4,19 @@ var FRAME_RATE = 10;
 var BACKGROUND_COLOR = "#ADD8E6"; // light blue
 
 var GROUND_COLOR = "#99ff66"; // light green
-var GROUND_HEIGHT = 20;
+var GROUND_HEIGHT = 30;
 
 var SLIME_COLOR = "blue"; // blue
+
+var FENCE_COLOR = "#dbce8e" // light brown
+var FENCE_X = 20;
+var FENCE_Y = 100;
+
 var canvas;
 var slime;
+var fence;
+var ground;
+
 
 function setup() {
     createCanvas(CANVAS_X, CANVAS_Y);
@@ -16,7 +24,14 @@ function setup() {
     canvas = new Canvas(CANVAS_X, CANVAS_Y, BACKGROUND_COLOR);
     canvas.show();
 
-    slime = new Slime(CANVAS_X, CANVAS_Y, SLIME_COLOR);
+    slime = new Slime(CANVAS_X / 4, CANVAS_Y - GROUND_HEIGHT, SLIME_COLOR);
+
+    fence = new Fence(CANVAS_X / 2, CANVAS_Y - FENCE_Y - GROUND_HEIGHT, FENCE_X, FENCE_Y, FENCE_COLOR);
+    fence.show();
+
+    ground = new Ground(CANVAS_X, CANVAS_Y, GROUND_HEIGHT, GROUND_COLOR);
+    ground.show();
+
 }
 
 function draw() {
