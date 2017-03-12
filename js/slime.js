@@ -9,10 +9,6 @@ function Slime(canvasX, canvasY, color){
 	//}
 	this.show = function(){
 		fill(this.color);
-		fill("color");
-		//rect(0,0,50,50);
-
-		console.log(Math.PI);
 
 		arc(this.position.x, this.position.y, 2*this.radius, 2*this.radius, 0, 0, PI);
 		fill("white");
