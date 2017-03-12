@@ -12,11 +12,13 @@ var FENCE_COLOR = "#dbce8e" // light brown
 var FENCE_X = 30;
 var FENCE_Y = 100;
 
+var BALL_RADIUS = 10;
+var BALL_COLOR = "#ffc04c" // light orange
 var canvas;
 var slime;
 var fence;
 var ground;
-
+var ball;
 
 function setup() {
     createCanvas(CANVAS_X, CANVAS_Y);
@@ -32,8 +34,10 @@ function setup() {
     ground = new Ground(CANVAS_X, CANVAS_Y, GROUND_HEIGHT, GROUND_COLOR);
     ground.show();
 
+    ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR);
 }
 
 function draw() {
 	slime.show();
+	ball.show();
 }
