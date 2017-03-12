@@ -14,6 +14,9 @@ var FENCE_Y = 100;
 
 var BALL_RADIUS = 10;
 var BALL_COLOR = "#ffc04c" // light orange
+var BALL_SPEED = 10;
+var BALL_WEIGHT = 10;
+
 var canvas;
 var slime;
 var fence;
@@ -24,20 +27,26 @@ function setup() {
     createCanvas(CANVAS_X, CANVAS_Y);
     frameRate(FRAME_RATE);
     canvas = new Canvas(CANVAS_X, CANVAS_Y, BACKGROUND_COLOR);
-    canvas.show();
 
     slime = new Slime(CANVAS_X / 4, CANVAS_Y - GROUND_HEIGHT, SLIME_COLOR);
 
     fence = new Fence(CANVAS_X / 2, CANVAS_Y - FENCE_Y - GROUND_HEIGHT, FENCE_X, FENCE_Y, FENCE_COLOR);
-    fence.show();
 
     ground = new Ground(CANVAS_X, CANVAS_Y, GROUND_HEIGHT, GROUND_COLOR);
-    ground.show();
 
-    ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR);
+    ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR, BALL_SPEED, BALL_WEIGHT);
 }
 
 function draw() {
+	// draw background
+	canvas.show();
+	ground.show();
+	fence.show();
+
+	// update ball location
+	ball.update();
+
+	
 	slime.show();
 	ball.show();
 }
