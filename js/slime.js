@@ -39,6 +39,7 @@ function Slime(x, y, color, radius, speed){
 	}
 
 	this.show = function(ball){
+		this.update();
 		fill(this.color);
 		arc(this.position.x, this.position.y, 2 * this.radius, 2 * this.radius, PI, PI * 2);
 		

@@ -1,6 +1,6 @@
 var CANVAS_X = 1000;
 var CANVAS_Y = 500;
-var FRAME_RATE = 10;
+var FRAME_RATE = 15;
 var BACKGROUND_COLOR = "#ADD8E6"; // light blue
 
 var GROUND_COLOR = "#99ff66"; // light green
@@ -8,7 +8,7 @@ var GROUND_HEIGHT = 50;
 
 var SLIME_COLOR = "blue"; // blue
 var SLIME_RADIUS = 60;
-var SLIME_SPEED = 5;
+var SLIME_SPEED = 10;
 
 var FENCE_COLOR = "#dbce8e" // light brown
 var FENCE_X = 30;
@@ -56,9 +56,9 @@ function draw() {
 function keyPressed() {
 
     if (key === 'W') {
-        slime.face(0, -1);
+        slime.jump();
     } else if (key === 'S') {
-        slime.face(0, 1);
+
     } else if (key === 'A') {
         slime.face(-1, 0);
     } else if (key === 'D') {
@@ -66,9 +66,8 @@ function keyPressed() {
     }
 
     if (keyCode === UP_ARROW) {
-        slime.face(0, -1);
+        slime.jump();
     } else if (keyCode === DOWN_ARROW) {
-        slime.face(0, 1);
     } else if (keyCode === LEFT_ARROW) {
         slime.face(-1, 0);
     } else if (keyCode === RIGHT_ARROW) {
