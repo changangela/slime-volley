@@ -1,4 +1,4 @@
-function Ball(positionX, positionY, radius, color, speed, weight, boundLeft, boundRight, boundDown) {
+function Ball(positionX, positionY, radius, color, speed, weight, boundLeft, boundRight, boundDown, gravity) {
 	this.position = new p5.Vector(positionX, positionY);
 	this.radius = radius;
 	this.color = color;
