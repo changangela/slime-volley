@@ -65,7 +65,9 @@ function Slime(x, y, color, radius, speed, jumpSpeed, front, leftBound, rightBou
 			this.position.y = this.downBound;
 		}
 	}
-
+	this.getNormal = function(point){
+		return (p5.Vector.sub(point, this.position)).normalize();
+	}
 	this.show = function(ball){
 		this.update();
 		fill(this.color);
