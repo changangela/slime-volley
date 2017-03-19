@@ -20,6 +20,8 @@ function Slime(x, y, color, radius, speed, jumpSpeed, front, leftBound, rightBou
 
 	this.gravity = gravity;
 
+	this.score = 0;
+
 	this.updateEyeballInfo = function(ball){
 		var ballPosition = ball.position;
 		//arc(ballPosition.x, ballPosition.y, 50, 50, 0, 2*PI);
@@ -85,5 +87,7 @@ function Slime(x, y, color, radius, speed, jumpSpeed, front, leftBound, rightBou
 		arc(this.eyeballPosition.x, this.eyeballPosition.y, this.eyeballRadius, this.eyeballRadius, 0, PI * 2);
 
 	}
-
+	this.win = function() {
+		this.score++;
+	}
 }

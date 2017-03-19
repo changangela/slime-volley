@@ -27,7 +27,7 @@ var button = function(buttonText, buttonColor, x, y, width, height) {
 var Menu = function(width, height) {
     BUTTON_X = width / 2 - BUTTON_WIDTH / 2 - 5;
     BUTTON_Y = height / 2;
-    this.hidden = false;
+    this.dead = false;
     this.show = function() {
         textStyle(NORMAL);
         textAlign(CENTER, CENTER);
@@ -51,10 +51,13 @@ var Menu = function(width, height) {
 
         return false;
     }
+    this.isDead = function() {
+        return this.dead;
+    }
 }
 
 function mouseReleased() {
     if (mouseX > BUTTON_X - BUTTON_WIDTH / 2 && mouseX < BUTTON_X + BUTTON_WIDTH / 2 && mouseY > BUTTON_Y - BUTTON_HEIGHT / 2 && mouseY < BUTTON_Y + BUTTON_HEIGHT / 2) {
-        menu.hidden = true;
+        menu.dead = true;
     } 
 }
