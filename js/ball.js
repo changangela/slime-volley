@@ -8,6 +8,9 @@ function Ball(positionX, positionY, radius, color, terminalVelocity, boundLeft, 
 	this.boundLeft = boundLeft;
 	this.boundRight = boundRight;
 	this.boundDown = boundDown;
+	this.dead = false;
+
+	this.dissolve = 255;
 
 	this.update = function(player1, player2, fence) {	
 			this.position = p5.Vector.add(this.position, this.velocity);
@@ -37,6 +40,13 @@ function Ball(positionX, positionY, radius, color, terminalVelocity, boundLeft, 
 			if (this.position.y + this.radius >= this.boundDown) {
 				this.position.y = this.boundDown - this.radius;
 				this.velocity.y = 0;
+				// ball is dead
+				this.dead = true;
+				if (this.position.x <= fence.position.x) {
+					player2.win();
+				} else {
+					player1.win();
+				}
 			}
 			
 			//collide with fence
@@ -92,8 +102,21 @@ function Ball(positionX, positionY, radius, color, terminalVelocity, boundLeft, 
 
 	this.show = function(player1, player2, fence) {
 		this.update(player1, player2, fence);
-		fill(this.color);
-		stroke(this.color);
+		fill("rgb(" + this.color.x + ", " + this.color.y + ", " + this.color.z + ")");
+		noStroke();
 		arc(this.position.x, this.position.y, radius * 2, radius * 2, 0, PI * 2);
+	}
+	this.isDead = function() {
+		return this.dead;
+	}
+
+	this.dissolved = function() {
+		noStroke();
+		fill(this.color.x, this.color.y, this.color.z, this.dissolve);
+		this.dissolve-=20;
+		console.log(this.dissolve);
+		arc(this.position.x, this.position.y, radius * 2, radius * 2, 0, PI * 2);
+		if (this.dissolve > 0) return false;
+		else return true;
 	}
 }

@@ -6,20 +6,20 @@ var BACKGROUND_COLOR = "#ADD8E6"; // light blue
 var GROUND_COLOR = "#99ff66"; // light green
 var GROUND_HEIGHT = 50;
 
-var SLIME1_COLOR = "yellow"; // blue
+var SLIME1_COLOR = "red"; // blue
 var SLIME2_COLOR = "blue"; // orange
 
 var SLIME_RADIUS = 60;
 var SLIME_SPEED = 20;
 var SLIME_JUMP_SPEED = 30;
-var SLIME_WEIGHT = 0.6
+var SLIME_WEIGHT = 0.5;
 
 var FENCE_COLOR = "#dbce8e" // light brown
 var FENCE_X = 300;
 var FENCE_Y = 100;
 
-var BALL_RADIUS = 10;
-var BALL_COLOR = "#ffc04c" // light orange
+var BALL_RADIUS = 15;
+var BALL_COLOR = {x :255, y : 185, z: 0}; // light orange
 var BALL_TERMINAL_VELOCITY = 20;
 var BALL_WEIGHT = 0.2;
 
@@ -51,24 +51,46 @@ function setup() {
 }
 
 function draw() {
-    // check the keys that are pressed
-
-    checkKeys();
     
     // draw background
 	canvas.show();
 	ground.show();
 	fence.show();
-	// update ball location
-    slime1.show(ball);
-    slime2.show(ball);
-    ball.show(slime1, slime2, fence);
 
-    if (!menu.hidden) {
+    if (!menu.isDead()) {
+        slime1.show(ball);
+        slime2.show(ball);
         menu.show();
+    } else {
+        // check the keys that are pressed
+        checkKeys();
+        
+        // update ball location
+        slime1.show(ball);
+        slime2.show(ball);
+
+        if (ball.isDead()) {
+            if (ball.dissolved()) {
+                ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR, BALL_TERMINAL_VELOCITY, 0, CANVAS_X, CANVAS_Y - GROUND_HEIGHT, GRAVITY * BALL_WEIGHT);
+            }
+        } else {
+            ball.show(slime1, slime2, fence);
+        }
+
+        // show score
+        displayScore();
     }
+
+    
 }
 
+function displayScore() {
+    fill(0);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    textSize(30);
+    text(slime1.score + "  -  " + slime2.score, CANVAS_X / 2, CANVAS_Y / 4);    
+}
 function checkKeys() {
     if (keyIsDown(65) && keyIsDown(68)) {
         // both left and right key
