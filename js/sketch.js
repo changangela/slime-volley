@@ -44,7 +44,7 @@ function setup() {
 
     ground = new Ground(CANVAS_X, CANVAS_Y, GROUND_HEIGHT, GROUND_COLOR);
 
-    ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR, BALL_SPEED, BALL_WEIGHT, 0, CANVAS_X, CANVAS_Y - GROUND_HEIGHT);
+    ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR, BALL_SPEED, 0, CANVAS_X, CANVAS_Y - GROUND_HEIGHT, GRAVITY);
 
     menu = new Menu(CANVAS_X, CANVAS_Y);
 }
@@ -59,9 +59,9 @@ function draw() {
 	ground.show();
 	fence.show();
 	// update ball location
-    ball.show(slime1, slime2);
-	slime1.show(ball);
+    slime1.show(ball);
     slime2.show(ball);
+    ball.show(slime1, slime2);
 
     if (!menu.hidden) {
         menu.show();
