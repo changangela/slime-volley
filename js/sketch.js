@@ -6,9 +6,11 @@ var BACKGROUND_COLOR = "#ADD8E6"; // light blue
 var GROUND_COLOR = "#99ff66"; // light green
 var GROUND_HEIGHT = 50;
 
-var SLIME_COLOR = "blue"; // blue
+var SLIME1_COLOR = "blue"; // blue
+var SLIME2_COLOR = "orange"; // orange
+
 var SLIME_RADIUS = 60;
-var SLIME_SPEED = 10;
+var SLIME_SPEED = 20;
 
 var FENCE_COLOR = "#dbce8e" // light brown
 var FENCE_X = 30;
@@ -20,7 +22,8 @@ var BALL_SPEED = 10;
 var BALL_WEIGHT = 10;
 
 var canvas;
-var slime;
+var slime1;
+var slime2;
 var fence;
 var ground;
 var ball;
@@ -30,7 +33,8 @@ function setup() {
     frameRate(FRAME_RATE);
     canvas = new Canvas(CANVAS_X, CANVAS_Y, BACKGROUND_COLOR);
 
-    slime = new Slime(CANVAS_X / 4, CANVAS_Y - GROUND_HEIGHT, SLIME_COLOR, SLIME_RADIUS, SLIME_SPEED);
+    slime1 = new Slime(CANVAS_X / 4, CANVAS_Y - GROUND_HEIGHT, SLIME1_COLOR, SLIME_RADIUS, SLIME_SPEED, 1, 0, CANVAS_X / 2 - FENCE_X / 2);
+    slime2 = new Slime(3 * CANVAS_X / 4, CANVAS_Y - GROUND_HEIGHT, SLIME2_COLOR, SLIME_RADIUS, SLIME_SPEED, -1, CANVAS_X / 2 + FENCE_X / 2, CANVAS_X);
 
     fence = new Fence(CANVAS_X / 2, CANVAS_Y - FENCE_Y - GROUND_HEIGHT, FENCE_X, FENCE_Y, FENCE_COLOR);
 
@@ -40,40 +44,64 @@ function setup() {
 }
 
 function draw() {
+    // check the keys that are pressed
+    checkKeys();
 	// draw background
 	canvas.show();
 	ground.show();
 	fence.show();
 
 	// update ball location
-	ball.update();
-	slime.update();
-	
-	slime.show(ball);
+
+	slime1.show(ball);
+    slime2.show(ball);
 	ball.show();
 }
 
-function keyPressed() {
-
-    if (key === 'W') {
-        slime.jump();
-    } else if (key === 'S') {
-
-    } else if (key === 'A') {
-        slime.face(-1, 0);
-    } else if (key === 'D') {
-        slime.face(1, 0);
+function checkKeys() {
+    if (keyIsDown(65) && keyIsDown(68)) {
+        // both left and right key
+        slime1.face(0, 0);
+        console.log("Slime 1: left and right");
+    } else if (keyIsDown(65)) {
+        // left key
+        slime1.face(-1, 0);
+        console.log("Slime 1: left");
+    } else if (keyIsDown(68)) {
+        // right key
+        slime1.face(1, 0);
+        console.log("Slime 1: right");
+    } else {
+        // neither left or right
+        slime1.face(0, 0);
     }
 
-    if (keyCode === UP_ARROW) {
-        slime.jump();
-    } else if (keyCode === DOWN_ARROW) {
-    } else if (keyCode === LEFT_ARROW) {
-        slime.face(-1, 0);
-    } else if (keyCode === RIGHT_ARROW) {
-        slime.face(1, 0);
-    }
 
+    if (keyIsDown(LEFT_ARROW) && keyIsDown(RIGHT_ARROW)) {
+        // both left and right key
+        slime2.face(0, 0);
+        console.log("Slime 2: left and right");
+    } else if (keyIsDown(LEFT_ARROW)) {
+        // left key
+        slime2.face(-1, 0);
+        console.log("Slime 2: left");
+    } else if (keyIsDown(RIGHT_ARROW)) {
+        // right key
+        slime2.face(1, 0);
+        console.log("Slime 2: right");
+    } else {
+        // neither left or right
+        slime1.face(0, 0);
+    }
 
 }
 
+function keyPressed() {
+    if (key === 'W') {
+        slime1.jump();
+    }
+
+    if (keyCode === UP_ARROW) {
+        slime2.jump();
+    }
+}
