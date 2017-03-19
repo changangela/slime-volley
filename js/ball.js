@@ -10,13 +10,13 @@ function Ball(positionX, positionY, radius, color, speed, weight, boundLeft, bou
 	this.boundDown = boundDown;
 
 	this.update = function(player1, player2) {
-		
+		console.log(this.direction);	
 			this.position = p5.Vector.add(this.position, this.direction.normalize().mult(this.speed));
-			if (this.collided(player1)) {
-
+			if (this.collided(player1)) {;
+				this.bounce(this.position, player1);
 			}
 			if (this.collided(player2)) {
-
+				this.bounce(this.position, player2);
 			}
 			if (this.position.x - this.radius < this.boundLeft) {
 				this.position.x = this.boundLeft + this.radius;
@@ -34,6 +34,10 @@ function Ball(positionX, positionY, radius, color, speed, weight, boundLeft, bou
 			this.position = p5.Vector.add(player.position, player.getNormal(this.position).mult((this.radius + player.radius)));
 			return true;
 		}
+	}
+	this.bounce = function(collisionPoint, player){
+		this.direction = p5.Vector.sub(this.direction, player.getNormal(collisionPoint).mult((2*p5.Vector.dot(this.direction, player.getNormal(collisionPoint))) / sq(player.getNormal(collisionPoint).mag())));
+		
 	}
 	this.show = function(player1, player2) {
 		this.update(player1, player2);
