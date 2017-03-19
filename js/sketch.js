@@ -15,8 +15,8 @@ var SLIME_JUMP_SPEED = 30;
 var SLIME_WEIGHT = 0.5;
 
 var FENCE_COLOR = "#dbce8e" // light brown
-var FENCE_X = 300;
-var FENCE_Y = 100;
+var FENCE_X = 40;
+var FENCE_Y = 125;
 
 var BALL_RADIUS = 15;
 var BALL_COLOR = {x :255, y : 185, z: 0}; // light orange
