@@ -61,7 +61,7 @@ function draw() {
 	// update ball location
     slime1.show(ball);
     slime2.show(ball);
-    ball.show(slime1, slime2);
+    ball.show(slime1, slime2, fence);
 
     if (!menu.hidden) {
         menu.show();

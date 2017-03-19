@@ -9,7 +9,7 @@ function Ball(positionX, positionY, radius, color, speed, boundLeft, boundRight,
 	this.boundRight = boundRight;
 	this.boundDown = boundDown;
 
-	this.update = function(player1, player2) {	
+	this.update = function(player1, player2, fence) {	
 			this.position = p5.Vector.add(this.position, this.velocity);
 			this.velocity.y += gravity;
 			if (this.collided(player1)) {;
@@ -19,16 +19,28 @@ function Ball(positionX, positionY, radius, color, speed, boundLeft, boundRight,
 			if (this.collided(player2)) {
 				this.bounce(player2);
 			}
+			//collide with left bound
 			if (this.position.x - this.radius < this.boundLeft) {
 				this.position.x = this.boundLeft + this.radius;
+				this.velocity.x = -this.velocity.x;
+				
 			}
+			//collide with right bound
 			if (this.position.x + this.radius > this.boundRight) {	
 				this.position.x = this.boundRight - this.radius;
-			}
+				this.velocity.x = -this.velocity.x;
 
+			}
+			//collide with ground
 			if (this.position.y + this.radius >= this.boundDown) {
 				this.position.y = this.boundDown - this.radius;
 				this.velocity.y = 0;
+			}
+			//collide with fence
+			if(this.position.y + this.radius > fence.position.y - 2 * fence.tipRadius){/*
+				&& this.position.x - this.radius <= fence.position.x + fence.width/2 
+				&& this.position.x + this.radius >= fence.position.x -fence.width/2){*/
+				alert(this.position.y + this.radius + ","+ fence.position.y + "+"+2*fence.tipRadius);
 			}
 	}
 	this.collided = function(player){
@@ -54,8 +66,8 @@ function Ball(positionX, positionY, radius, color, speed, boundLeft, boundRight,
 
 	}
 
-	this.show = function(player1, player2) {
-		this.update(player1, player2);
+	this.show = function(player1, player2, fence) {
+		this.update(player1, player2, fence);
 		fill(this.color);
 		stroke(this.color);
 		arc(this.position.x, this.position.y, radius * 2, radius * 2, 0, PI * 2);
