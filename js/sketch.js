@@ -19,7 +19,7 @@ var FENCE_Y = 100;
 
 var BALL_RADIUS = 10;
 var BALL_COLOR = "#ffc04c" // light orange
-var BALL_SPEED = 10;
+var BALL_TERMINAL_VELOCITY = 40;
 var BALL_WEIGHT = 10;
 
 var GRAVITY = 5;
@@ -44,7 +44,7 @@ function setup() {
 
     ground = new Ground(CANVAS_X, CANVAS_Y, GROUND_HEIGHT, GROUND_COLOR);
 
-    ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR, BALL_SPEED, 0, CANVAS_X, CANVAS_Y - GROUND_HEIGHT, GRAVITY);
+    ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR, BALL_TERMINAL_VELOCITY, 0, CANVAS_X, CANVAS_Y - GROUND_HEIGHT, GRAVITY);
 
     menu = new Menu(CANVAS_X, CANVAS_Y);
 }

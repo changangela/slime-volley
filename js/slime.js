@@ -61,8 +61,9 @@ function Slime(x, y, color, radius, speed, jumpSpeed, front, leftBound, rightBou
 
 		this.velocity.y += this.gravity;
 
-		if (this.position.y > this.downBound) {
+		if (this.position.y >= this.downBound) {
 			this.position.y = this.downBound;
+			this.velocity.y = 0;
 		}
 	}
 	this.getNormal = function(point){
