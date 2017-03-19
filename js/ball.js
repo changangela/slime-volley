@@ -40,13 +40,28 @@ function Ball(positionX, positionY, radius, color, terminalVelocity, boundLeft, 
 			}
 			
 			//collide with fence
-			if (this.position.x + this.radius >= fence.position.x) {
-
-			}
-			if(this.position.y + this.radius > fence.position.y){/*
-				&& this.position.x - this.radius <= fence.position.x + fence.width/2 
-				&& this.position.x + this.radius >= fence.position.x -fence.width/2){*/
-				// alert(this.position.y + this.radius + ","+ fence.position.y + "+"+2*fence.tipRadius);
+			if(this.position.y + this.radius > fence.position.y
+				&& this.position.x - this.radius < fence.position.x + fence.size.x/2
+				&& this.position.x + this.radius > fence.position.x - fence.size.x/2){
+				if(this.position.y > fence.position.y + fence.tipRadius){ //under the fence tip
+					if(this.position.x > fence.position.x){
+						this.position.x = fence.position.x + fence.size.x/2 + this.radius;
+					}
+					else if (this.position.x < fence.position.x){
+						this.position.x = fence.position.x - fence.size.x/2 - this.radius;
+					}
+					else{
+						alert("this is impossible");
+						this.position.x = fence.position.x - fence.size.x/2 - this.radius;
+					}
+					this.velocity.x = -this.velocity.x;
+				}
+				else{
+					if (p5.Vector.dist(fence.tipPosition, this.position) < this.radius + fence.tipRadius){
+						this.position = p5.Vector.add(fence.tipPosition, fence.getNormal(this.position).mult(fence.tipRadius + this.radius));
+						this.velocity = p5.Vector.sub(this.velocity, fence.getNormal(this.position).mult((2 * p5.Vector.dot(this.velocity, fence.getNormal(this.position))) / sq(fence.getNormal(this.position).mag())));						
+					}
+				}
 			}
 
 	}

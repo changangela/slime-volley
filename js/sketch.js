@@ -15,7 +15,7 @@ var SLIME_JUMP_SPEED = 30;
 var SLIME_WEIGHT = 0.6
 
 var FENCE_COLOR = "#dbce8e" // light brown
-var FENCE_X = 30;
+var FENCE_X = 300;
 var FENCE_Y = 100;
 
 var BALL_RADIUS = 10;

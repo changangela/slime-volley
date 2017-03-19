@@ -21,18 +21,12 @@ function Slime(x, y, color, radius, speed, jumpSpeed, front, leftBound, rightBou
 	this.gravity = gravity;
 
 	this.updateEyeballInfo = function(ball){
-		var ballPosition = ball.position;
-		//arc(ballPosition.x, ballPosition.y, 50, 50, 0, 2*PI);
+		var ballPosition = ball.position;;
 		var x = ballPosition.x - (this.position.x + this.radius / 2);
 		var y = ballPosition.y - (this.position.y - this.radius / 2);
-		//fill("white");
-		//arc(x, y, this.radius/4, this.radius/4, 0, PI*2);
 		var length = sqrt(x*x + y*y);
-		//console.log("x=" + x);
 		x = x/length * (this.radius / 4);
 		y = y/length * (this.radius / 4);
-		
-		//console.log("eyeX  =" + this.eyePosition.x);
 		this.eyeballPosition.x = x / 2 + (this.position.x + this.radius / 2 * this.front);
 		this.eyeballPosition.y = y / 2 + (this.position.y - this.radius / 2);
 	}
@@ -49,7 +43,6 @@ function Slime(x, y, color, radius, speed, jumpSpeed, front, leftBound, rightBou
 	}
 
 	this.update = function() {
-	//	console.log(this.direction.x + " " + this.direction.y);
 		this.position = p5.Vector.add(this.position, this.velocity);
 		if (this.position.x - this.radius < this.bound.x) {
 			this.position.x = this.bound.x + this.radius;
