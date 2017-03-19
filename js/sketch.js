@@ -30,6 +30,7 @@ var slime2;
 var fence;
 var ground;
 var ball;
+var menu;
 
 function setup() {
     createCanvas(CANVAS_X, CANVAS_Y);
@@ -44,21 +45,29 @@ function setup() {
     ground = new Ground(CANVAS_X, CANVAS_Y, GROUND_HEIGHT, GROUND_COLOR);
 
     ball = new Ball(CANVAS_X / 4, CANVAS_Y / 2, BALL_RADIUS, BALL_COLOR, BALL_SPEED, BALL_WEIGHT, 0, CANVAS_X, CANVAS_Y - GROUND_HEIGHT);
+
+    menu = new Menu(CANVAS_X, CANVAS_Y);
 }
 
 function draw() {
     // check the keys that are pressed
+
     checkKeys();
-	// draw background
+    
+    // draw background
 	canvas.show();
 	ground.show();
 	fence.show();
-
 	// update ball location
     ball.show(slime1, slime2);
 	slime1.show(ball);
     slime2.show(ball);
+
+    if (!menu.hidden) {
+        menu.show();
+    }
 }
+
 function checkKeys() {
     if (keyIsDown(65) && keyIsDown(68)) {
         // both left and right key
@@ -106,4 +115,3 @@ function checkKeys() {
     }
 
 }
-
